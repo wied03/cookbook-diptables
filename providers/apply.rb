@@ -19,6 +19,8 @@ action :apply do
       source 'iptables_rules.erb'
       notifies :run, 'execute[diptables-reload-iptables]' unless node['diptables']['dry_run']
       action :create
+      # Otherwise, will look for the erb in the calling template
+      cookbook 'diptables'
   end
 
   unless node['diptables']['dry_run']
